@@ -1,18 +1,21 @@
 from csv_parser import CSVParser
-from knapsack import Knapsack
-from tsp import TSP
+from Knapsack import knapsack
+from Tsp import tsp
+
 
 def main():
-    songs = CSVParser.parse_songs("songs_data.csv")
-    max_duration = 200  # Replace this value with your desired maximum duration
-    selected_songs = Knapsack.knapsack(songs, max_duration)
-    for song in selected_songs:
-        print(f"Song: Popularity - {song.popularity}, Duration - {song.duration}")
+    songs = CSVParser.parse_songs("adele_songs_data.csv")
+    cities = CSVParser.parse_cities("begum_berkay_cities.csv")
 
-    file_name = "data/cities.csv"
-    cities = CSVParser.parse_cities(file_name)
-    result = TSP.nearest_neighbor_tsp(cities)
-    # Other parts of your code
+    tour = tsp.nearest_neighbor_tsp(cities)
+
+    for city in tour:
+        max_duration = city.concert_duration
+        selected_songs = knapsack.greedy_knapsack(songs, int(max_duration))
+        print(f"City: {city.name}")
+        for song in selected_songs:
+            print(f"- {song.name}, Popularity: {song.popularity}, Duration: {song.duration}")
+        print("\n")
 
 if __name__ == "__main__":
     main()
