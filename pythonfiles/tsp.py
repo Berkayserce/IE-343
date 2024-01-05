@@ -1,4 +1,4 @@
-class TSP:
+class tsp:
     @staticmethod
     def nearest_neighbor_tsp(cities):
         num_cities = len(cities)
