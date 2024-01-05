@@ -1,6 +1,6 @@
-class Knapsack:
+class knapsack:
     @staticmethod
-    def knapsack(songs, max_duration):
+    def greedy_knapsack(songs, max_duration):
         songs.sort(key=lambda x: x.popularity / x.duration, reverse=True)
 
         selected_songs = []
